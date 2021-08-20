@@ -42,11 +42,6 @@ class _DatapageState extends State<Datapage> {
             actions: [
               IconButton(
                 color: Colors.black,
-                icon: Icon(Icons.notifications),
-                onPressed: () {},
-              ),
-              IconButton(
-                color: Colors.black,
                 icon: Icon(Icons.logout),
                 onPressed: () async {
                   await Firebase.initializeApp().then((value) async {
@@ -318,7 +313,9 @@ class _DatapageState extends State<Datapage> {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ShowListCowData(type: titles![index],),
+          builder: (context) => ShowListCowData(
+            type: titles![index],
+          ),
         ));
   }
 }

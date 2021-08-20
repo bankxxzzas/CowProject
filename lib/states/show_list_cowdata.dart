@@ -96,7 +96,7 @@ class _ShowListCowDataState extends State<ShowListCowData> {
       itemBuilder: (context, index) => InkWell(
         onTap: () => myShowDialog(cowDataModels[index]),
         child: Card(
-          color: index % 2 == 0 ? Colors.red.shade200 : Colors.white,
+          color: index % 2 == 0 ? Colors.green : Colors.blueGrey,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

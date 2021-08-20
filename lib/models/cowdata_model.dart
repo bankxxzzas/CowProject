@@ -64,7 +64,8 @@ class CowDataModel {
 
   String toJson() => json.encode(toMap());
 
-  factory CowDataModel.fromJson(String source) => CowDataModel.fromMap(json.decode(source));
+  factory CowDataModel.fromJson(String source) =>
+      CowDataModel.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -74,25 +75,25 @@ class CowDataModel {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is CowDataModel &&
-      other.ageString == ageString &&
-      other.dateChoose == dateChoose &&
-      other.gendle == gendle &&
-      other.idCode == idCode &&
-      other.pathImage == pathImage &&
-      other.type == type &&
-      other.uidRecord == uidRecord;
+        other.ageString == ageString &&
+        other.dateChoose == dateChoose &&
+        other.gendle == gendle &&
+        other.idCode == idCode &&
+        other.pathImage == pathImage &&
+        other.type == type &&
+        other.uidRecord == uidRecord;
   }
 
   @override
   int get hashCode {
     return ageString.hashCode ^
-      dateChoose.hashCode ^
-      gendle.hashCode ^
-      idCode.hashCode ^
-      pathImage.hashCode ^
-      type.hashCode ^
-      uidRecord.hashCode;
+        dateChoose.hashCode ^
+        gendle.hashCode ^
+        idCode.hashCode ^
+        pathImage.hashCode ^
+        type.hashCode ^
+        uidRecord.hashCode;
   }
 }

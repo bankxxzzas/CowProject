@@ -77,7 +77,7 @@ class _AdddataState extends State<Adddata> {
                           : SizedBox(),
                   buildtitle('เพศ'),
                   buildgendle(),
-                  buildtitle('อายุ(ปี)'),
+                  buildtitle('อายุ'),
                   builddateAge(),
                   //formAge(),
                   buildtitle('วันที่ฉีดวัคซีน'),
