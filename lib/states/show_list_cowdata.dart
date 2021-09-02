@@ -17,6 +17,7 @@ class _ShowListCowDataState extends State<ShowListCowData> {
   String? type;
   List<CowDataModel> cowDataModels = [];
 
+
   @override
   void initState() {
     super.initState();
@@ -41,6 +42,9 @@ class _ShowListCowDataState extends State<ShowListCowData> {
     });
   }
 
+
+ 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,26 +59,51 @@ class _ShowListCowDataState extends State<ShowListCowData> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Future<Null> myShowDialog(CowDataModel model) async {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: ShowTitle(title: 'รหัส = ${model.idCode}'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('เพศ = ${model.gendle}'),
-            Text('อายุ = ${model.ageString}'),
-            Text('วันที่ฉีดวัคซีน = ${model.dateChoose}'),
-            SizedBox(
-              height: 8,
-            ),
-            Image.network(model.pathImage),
-            SizedBox(
-              height: 8,
-            ),
-          ],
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'เพศ = ${model.gendle}',
+                style: TextStyle(fontSize: 15),
+              ),
+              
+              Text(
+                'อายุ = ${model.ageString}',
+                style: TextStyle(fontSize: 15),
+              ),
+              Text(
+                'วัคซีนมือปากเท้าเปื่อย :',
+                style: TextStyle(fontSize: 15),
+              ),
+              Text(
+                '${model.dateChoose}',
+                style: TextStyle(fontSize: 15),
+              ),
+              Text(
+                'วัคซีนลัมปีสกิน :',
+                style: TextStyle(fontSize: 15),
+              ),
+              Text(
+                '${model.dateChooseNew}',
+                style: TextStyle(fontSize: 15),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Image.network(model.pathImage),
+              SizedBox(
+                height: 8,
+              ),
+            ],
+          ),
         ),
         actions: [
           TextButton(
