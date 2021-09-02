@@ -24,6 +24,7 @@ class _AdddataState extends State<Adddata> {
 
   String? gendle;
   String? dateChooseStr;
+  String? dateChooseLtr;
   String? dateMix;
   String? dateAge;
   String? ageString;
@@ -77,11 +78,13 @@ class _AdddataState extends State<Adddata> {
                           : SizedBox(),
                   buildtitle('เพศ'),
                   buildgendle(),
-                  buildtitle('อายุ'),
+                  buildtitle('เกิดวันที่'),
                   builddateAge(),
                   //formAge(),
-                  buildtitle('วันที่ฉีดวัคซีน'),
+                  buildtitle('วันที่ฉีดวัคซีนโรคมือปากเท้าเปื่อย'),
                   builddate(),
+                  buildtitle('วันที่ฉีดวัคซีนโรคลัมปีสกิน'),
+                  builddateNew(),
                   buildPhoto(),
                   buildSave(constraints),
                 ],
@@ -119,15 +122,15 @@ class _AdddataState extends State<Adddata> {
     DateTime? chooseDateTime = await showDatePicker(
         context: context,
         initialDate: dateTime,
-        firstDate: DateTime(dateTime.year - 5),
-        lastDate: DateTime(dateTime.year + 5));
+        firstDate: DateTime(dateTime.year - 10),
+        lastDate: DateTime(dateTime.year + 10));
 
     DateFormat dateFormat = DateFormat('dd-MM-yyyy');
     setState(() {
       dateMix = dateFormat.format(chooseDateTime!);
     });
 
-    print('chooseDateTime == $dateChooseStr');
+    print('chooseDateTime == $dateMix');
   }
 
   Container buildSave(BoxConstraints constraints) => Container(
@@ -330,8 +333,8 @@ class _AdddataState extends State<Adddata> {
     DateTime? chooseDateTime = await showDatePicker(
         context: context,
         initialDate: dateTime,
-        firstDate: DateTime(dateTime.year - 5),
-        lastDate: DateTime(dateTime.year + 5));
+        firstDate: DateTime(dateTime.year - 10),
+        lastDate: DateTime(dateTime.year + 10));
 
     DateFormat dateFormat = DateFormat('dd-MM-yyyy');
     setState(() {
@@ -340,6 +343,36 @@ class _AdddataState extends State<Adddata> {
 
     print('chooseDateTime == $dateChooseStr');
   }
+
+   Container builddateNew() {
+    return Container(
+      margin: EdgeInsets.only(left: 10, top: 5, right: 10, bottom: 20),
+      child: ListTile(
+        leading: Icon(Icons.date_range),
+        title: Text(dateChooseLtr == null ? 'dd-MM-YYYY' : dateChooseLtr!),
+        onTap: () => chooseDateNew(),
+      ),
+    );
+  }
+
+  Future<Null> chooseDateNew() async {
+    DateTime dateTime = DateTime.now();
+    String showDateTime = dateTime.toString();
+
+    DateTime? chooseDateTime = await showDatePicker(
+        context: context,
+        initialDate: dateTime,
+        firstDate: DateTime(dateTime.year - 10),
+        lastDate: DateTime(dateTime.year + 10));
+
+    DateFormat dateFormat = DateFormat('dd-MM-yyyy');
+    setState(() {
+      dateChooseLtr = dateFormat.format(chooseDateTime!);
+    });
+
+    print('chooseDateTime == $dateChooseLtr');
+  }
+
 
   Container buildgendle() {
     return Container(
@@ -415,7 +448,10 @@ class _AdddataState extends State<Adddata> {
                     idCode: idCode,
                     pathImage: pathImage,
                     type: type!,
-                    uidRecord: uid);
+                    uidRecord: uid, 
+                    dateChooseNew: dateChooseLtr!, 
+                    
+                    );
 
                 Map<String, dynamic> map = model.toMap();
                 await FirebaseFirestore.instance
