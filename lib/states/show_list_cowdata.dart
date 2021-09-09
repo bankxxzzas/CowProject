@@ -22,7 +22,7 @@ class _ShowListCowDataState extends State<ShowListCowData> {
   void initState() {
     super.initState();
     type = widget.type;
-    readCowData();
+   readCowData();
   }
 
   Future<Null> readCowData() async {
@@ -34,6 +34,7 @@ class _ShowListCowDataState extends State<ShowListCowData> {
           .listen((event) {
         for (var item in event.docs) {
           CowDataModel model = CowDataModel.fromMap(item.data());
+
           setState(() {
             cowDataModels.add(model);
           });
@@ -43,7 +44,6 @@ class _ShowListCowDataState extends State<ShowListCowData> {
   }
 
 
- 
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +61,7 @@ class _ShowListCowDataState extends State<ShowListCowData> {
 
   // ignore: non_constant_identifier_names
   Future<Null> myShowDialog(CowDataModel model) async {
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -125,7 +126,7 @@ class _ShowListCowDataState extends State<ShowListCowData> {
       itemBuilder: (context, index) => InkWell(
         onTap: () => myShowDialog(cowDataModels[index]),
         child: Card(
-          color: index % 2 == 0 ? Colors.green : Colors.blueGrey,
+          color: index % 2 == 0 ? Colors.green : Colors.white,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

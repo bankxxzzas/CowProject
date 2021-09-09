@@ -26,7 +26,7 @@ class _DatapageState extends State<Datapage> {
 
   @override
   Widget build(BuildContext context) => DefaultTabController(
-        length: 4,
+        length: 3,
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.black,
@@ -60,44 +60,93 @@ class _DatapageState extends State<Datapage> {
                       end: Alignment.topLeft)),
             ),
             bottom: TabBar(
-              indicatorWeight: 2,
-              isScrollable: true,
+              indicatorWeight: 3,
               indicatorColor: Colors.white,
               tabs: [
                 Tab(
-                  icon: Icon(
-                    Icons.home,
-                    color: Colors.black,
+                  icon: MaterialButton(
+                    child: Container(
+                      child: Column(
+                        children: [
+                          Icon(
+                            Icons.face_retouching_natural_rounded,
+                            color: Colors.black,
+                          ),
+                          Text(
+                            'โปรไฟล์',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Adddata()));
+                    },
                   ),
-                  text: ('Home'),
                 ),
                 Tab(
-                  icon: Icon(
-                    Icons.star,
-                    color: Colors.black,
+                  icon: MaterialButton(
+                    child: Container(
+                      child: Column(
+                        children: [
+                          Icon(
+                            Icons.notifications_active,
+                            color: Colors.black,
+                          ),
+                          Text(
+                            'แจ้งเตือน',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Adddata()));
+                    },
                   ),
-                  text: ('Feed'),
                 ),
                 Tab(
-                  icon: Icon(
-                    Icons.face,
-                    color: Colors.black,
+                  icon: MaterialButton(
+                    child: Container(
+                      child: Column(
+                        children: [
+                          Icon(
+                            Icons.logout,
+                            color: Colors.black,
+                          ),
+                          Text(
+                            'ออกระบบ',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    onPressed: () async {
+                      await Firebase.initializeApp().then((value) async {
+                        await FirebaseAuth.instance.signOut().then((value) =>
+                            Navigator.pushNamedAndRemoveUntil(
+                                context, '/authen', (route) => false));
+                      });
+                    },
                   ),
-                  text: ('Profile'),
-                ),
-                Tab(
-                  icon: Icon(
-                    Icons.settings,
-                    color: Colors.black,
-                  ),
-                  text: ('Setting'),
                 ),
               ],
             ),
           ),
           body: SingleChildScrollView(
             child: Container(
-              padding: EdgeInsets.only(bottom: 52),
+              padding: EdgeInsets.only(bottom: 56),
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage('assets/images/cow22.png'),
@@ -121,7 +170,17 @@ class _DatapageState extends State<Datapage> {
                                       Radius.circular(
                                           10.0)), // set rounded corner radius
                                 ),
-                                child: Image.asset('assets/images/addata.png')),
+                                child: Column(
+                                  children: [
+                                    Image.asset('assets/images/addata.png'),
+                                    Container(
+                                        padding: EdgeInsets.only(bottom: 10),
+                                        color: Colors.white,
+                                        width: 160,
+                                        child:
+                                            Center(child: Text('เพิ่มข้อมูล'))),
+                                  ],
+                                )),
                             onPressed: () {
                               Navigator.push(
                                   context,
@@ -140,32 +199,23 @@ class _DatapageState extends State<Datapage> {
                                       Radius.circular(
                                           10.0)), // set rounded corner radius
                                 ),
-                                child: Image.asset('assets/images/men.png')),
+                                child: Column(
+                                  children: [
+                                    Image.asset('assets/images/men.png'),
+                                    Container(
+                                        padding: EdgeInsets.only(bottom: 10),
+                                        color: Colors.white,
+                                        width: 160,
+                                        child:
+                                            Center(child: Text('พ่อพันธุ์'))),
+                                  ],
+                                )),
                             onPressed: () {
                               myNavigator(0);
                             },
                           ),
                         ],
                       ),
-                    ),
-                    Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                                margin: EdgeInsets.only(top: 5),
-                                color: Colors.white,
-                                width: 160,
-                                child: Center(child: Text('เพิ่มข้อมูล'))),
-                            Container(
-                                margin: EdgeInsets.only(top: 5),
-                                color: Colors.white,
-                                width: 160,
-                                child: Center(child: Text('พ่อพันธุ์'))),
-                          ],
-                        ),
-                      ],
                     ),
                     Container(
                       padding: EdgeInsets.only(top: 20),
@@ -186,8 +236,18 @@ class _DatapageState extends State<Datapage> {
                                           Radius.circular(
                                               10.0)), // set rounded corner radius
                                     ),
-                                    child:
-                                        Image.asset('assets/images/women.png')),
+                                    child: Column(
+                                      children: [
+                                        Image.asset('assets/images/women.png'),
+                                        Container(
+                                            padding:
+                                                EdgeInsets.only(bottom: 10),
+                                            color: Colors.white,
+                                            width: 160,
+                                            child: Center(
+                                                child: Text('แม่พันธุ์'))),
+                                      ],
+                                    )),
                                 onPressed: () {
                                   myNavigator(1);
                                 },
@@ -204,8 +264,18 @@ class _DatapageState extends State<Datapage> {
                                           Radius.circular(
                                               10.0)), // set rounded corner radius
                                     ),
-                                    child:
-                                        Image.asset('assets/images/wagyu.png')),
+                                    child: Column(
+                                      children: [
+                                        Image.asset('assets/images/wagyu.png'),
+                                        Container(
+                                            padding:
+                                                EdgeInsets.only(bottom: 10),
+                                            color: Colors.white,
+                                            width: 160,
+                                            child:
+                                                Center(child: Text('วัวขุน'))),
+                                      ],
+                                    )),
                                 onPressed: () {
                                   myNavigator(2);
                                 },
@@ -214,25 +284,6 @@ class _DatapageState extends State<Datapage> {
                           ),
                         ],
                       ),
-                    ),
-                    Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                                margin: EdgeInsets.only(top: 5),
-                                color: Colors.white,
-                                width: 160,
-                                child: Center(child: Text('แม่พันธุ์'))),
-                            Container(
-                                margin: EdgeInsets.only(top: 5),
-                                color: Colors.white,
-                                width: 160,
-                                child: Center(child: Text('วัวขุน'))),
-                          ],
-                        ),
-                      ],
                     ),
                     Container(
                       padding: EdgeInsets.only(top: 20),
@@ -250,7 +301,17 @@ class _DatapageState extends State<Datapage> {
                                       Radius.circular(
                                           10.0)), // set rounded corner radius
                                 ),
-                                child: Image.asset('assets/images/nof.png')),
+                                child: Column(
+                                  children: [
+                                    Image.asset('assets/images/nof.png'),
+                                    Container(
+                                        padding: EdgeInsets.only(bottom: 10),
+                                        color: Colors.white,
+                                        width: 160,
+                                        child:
+                                            Center(child: Text('แจ้งเตือน'))),
+                                  ],
+                                )),
                             onPressed: () {
                               Navigator.push(
                                   context,
@@ -269,8 +330,16 @@ class _DatapageState extends State<Datapage> {
                                       Radius.circular(
                                           10.0)), // set rounded corner radius
                                 ),
-                                child:
-                                    Image.asset('assets/images/Setting.png')),
+                                child: Column(
+                                  children: [
+                                    Image.asset('assets/images/setting.png'),
+                                    Container(
+                                        padding: EdgeInsets.only(bottom: 10),
+                                        color: Colors.white,
+                                        width: 160,
+                                        child: Center(child: Text('ตั้งค่า'))),
+                                  ],
+                                )),
                             onPressed: () {
                               Navigator.push(
                                   context,
@@ -280,25 +349,6 @@ class _DatapageState extends State<Datapage> {
                           ),
                         ],
                       ),
-                    ),
-                    Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                                margin: EdgeInsets.only(top: 5),
-                                color: Colors.white,
-                                width: 160,
-                                child: Center(child: Text('การแจ้งเตือน'))),
-                            Container(
-                                margin: EdgeInsets.only(top: 5),
-                                color: Colors.white,
-                                width: 160,
-                                child: Center(child: Text('ตั้งค่า'))),
-                          ],
-                        ),
-                      ],
                     ),
                   ],
                 ),

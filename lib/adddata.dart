@@ -53,7 +53,7 @@ class _AdddataState extends State<Adddata> {
         title: Text('เพิ่มข้อมูล'),
         actions: [
           IconButton(
-              onPressed: () => processSaveDate(), icon: Icon(Icons.upload))
+              onPressed: () => processSaveDate(), icon: Icon(Icons.cloud_upload))
         ],
       ),
       body: SingleChildScrollView(
@@ -153,9 +153,9 @@ class _AdddataState extends State<Adddata> {
           onPressed: () => chooseImage(ImageSource.camera),
         ),
         Container(
-          width: 250.0,
+          width: 200.0,
           child: file == null
-              ? Image.asset('assets/images/addata.png')
+              ? Image.asset('assets/images/photo.png')
               : Image.file(file!),
         ),
         IconButton(
@@ -450,8 +450,11 @@ class _AdddataState extends State<Adddata> {
                     type: type!,
                     uidRecord: uid, 
                     dateChooseNew: dateChooseLtr!, 
-                    
                     );
+
+               
+
+
 
                 Map<String, dynamic> map = model.toMap();
                 await FirebaseFirestore.instance

@@ -40,112 +40,117 @@ class _LoginState extends State<Login> {
                 title: Text(("เข้าสู่ระบบ")),
               ),
               body: Container(
-                child: Form(
-                  key: formKey,
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 50, 10, 0),
-                      child: Column(children: [
-                        Container(
-                            margin: EdgeInsets.only(bottom: 20),
-                            child: Image.asset(
-                              'assets/images/cow.jpg',
-                              width: 400,
-                            )),
-                        Container(
-                            padding: EdgeInsets.only(left: 10),
-                            alignment: FractionalOffset.topLeft,
-                            child: Text('อีเมล')),
-                        Container(
-                          margin: EdgeInsets.only(top: 5, bottom: 20),
-                          height: 50,
-                          child: TextFormField(
-                            keyboardType: TextInputType.emailAddress,
-                            validator: MultiValidator([
-                              RequiredValidator(
+                child: GestureDetector(
+                  onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+                  behavior: HitTestBehavior.opaque,
+                  child: Form(
+                    key: formKey,
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 50, 10, 0),
+                        child: Column(children: [
+                          Container(
+                              margin: EdgeInsets.only(bottom: 20),
+                              child: Image.asset(
+                                'assets/images/cow.jpg',
+                                width: 400,
+                              )),
+                          Container(
+                              padding: EdgeInsets.only(left: 10),
+                              alignment: FractionalOffset.topLeft,
+                              child: Text('อีเมล')),
+                          Container(
+                            margin: EdgeInsets.only(top: 5, bottom: 20),
+                            height: 50,
+                            child: TextFormField(
+                              keyboardType: TextInputType.emailAddress,
+                              validator: MultiValidator([
+                                RequiredValidator(
+                                    errorText: "กรุณากรอกรหัสผ่านด้วยครับ"),
+                                EmailValidator(
+                                    errorText: "รูปแบบอีเมลไม่ถูกต้อง"),
+                              ]),
+                              onSaved: (String? email) {
+                                profile.email = email;
+                              },
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: '',
+                              ),
+                            ),
+                          ),
+                          Container(
+                              padding: EdgeInsets.only(left: 10),
+                              alignment: FractionalOffset.topLeft,
+                              child: Text('รหัสผ่าน')),
+                          Container(
+                            margin: EdgeInsets.only(top: 5, bottom: 20),
+                            height: 50,
+                            child: TextFormField(
+                              obscureText: true,
+                              validator: RequiredValidator(
                                   errorText: "กรุณากรอกรหัสผ่านด้วยครับ"),
-                              EmailValidator(
-                                  errorText: "รูปแบบอีเมลไม่ถูกต้อง"),
-                            ]),
-                            onSaved: (String? email) {
-                              profile.email = email;
-                            },
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: '',
+                              onSaved: (String? password) {
+                                profile.password = password;
+                              },
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: '',
+                              ),
                             ),
                           ),
-                        ),
-                        Container(
-                            padding: EdgeInsets.only(left: 10),
-                            alignment: FractionalOffset.topLeft,
-                            child: Text('รหัสผ่าน')),
-                        Container(
-                          margin: EdgeInsets.only(top: 5, bottom: 20),
-                          height: 50,
-                          child: TextFormField(
-                            obscureText: true,
-                            validator: RequiredValidator(
-                                errorText: "กรุณากรอกรหัสผ่านด้วยครับ"),
-                            onSaved: (String? password) {
-                              profile.password = password;
-                            },
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: '',
-                            ),
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton.icon(
+                                icon: Icon(Icons.login),
+                                label: Text(
+                                  "ลงชื่อเข้าใช้",
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                onPressed: () async {
+                                  if (formKey.currentState!.validate()) {
+                                    formKey.currentState!.save();
+                                    try {
+                                      await FirebaseAuth.instance
+                                          .signInWithEmailAndPassword(
+                                              email: profile.email!,
+                                              password: profile.password!)
+                                          .then((value) {
+                                        formKey.currentState!.reset();
+                                        Navigator.pushReplacement(context,
+                                            MaterialPageRoute(
+                                                builder: (context) {
+                                          return Datapage();
+                                        }));
+                                      });
+                                    } on FirebaseAuthException catch (e) {
+                                      Fluttertoast.showToast(
+                                          msg: e.message!,
+                                          gravity: ToastGravity.CENTER);
+                                    }
+                                  }
+                                }),
                           ),
-                        ),
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton.icon(
-                              icon: Icon(Icons.login),
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton.icon(
+                              icon: Icon(Icons.add),
                               label: Text(
-                                "ลงชื่อเข้าใช้",
+                                "สร้างบัญชีผู้ใช้",
                                 style: TextStyle(fontSize: 20),
                               ),
-                              onPressed: () async {
-                                if (formKey.currentState!.validate()) {
-                                  formKey.currentState!.save();
-                                  try {
-                                    await FirebaseAuth.instance
-                                        .signInWithEmailAndPassword(
-                                            email: profile.email!,
-                                            password: profile.password!)
-                                        .then((value) {
-                                      formKey.currentState!.reset();
-                                      Navigator.pushReplacement(context,
-                                          MaterialPageRoute(builder: (context) {
-                                        return Datapage();
-                                      }));
-                                    });
-                                  } on FirebaseAuthException catch (e) {
-                                    Fluttertoast.showToast(
-                                        msg: e.message!,
-                                        gravity: ToastGravity.CENTER);
-                                  }
-                                }
-                              }),
-                        ),
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton.icon(
-                            icon: Icon(Icons.add),
-                            label: Text(
-                              "สร้างบัญชีผู้ใช้",
-                              style: TextStyle(fontSize: 20),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) {
+                                    return Register();
+                                  }),
+                                );
+                              },
                             ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) {
-                                  return Register();
-                                }),
-                              );
-                            },
                           ),
-                        ),
-                      ]),
+                        ]),
+                      ),
                     ),
                   ),
                 ),
