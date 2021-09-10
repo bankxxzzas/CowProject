@@ -29,6 +29,7 @@ class _DatapageState extends State<Datapage> {
         length: 3,
         child: Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             backgroundColor: Colors.black,
             title: Center(
               child: Text(
@@ -39,19 +40,7 @@ class _DatapageState extends State<Datapage> {
               ),
             ),
             centerTitle: true,
-            actions: [
-              IconButton(
-                color: Colors.black,
-                icon: Icon(Icons.logout),
-                onPressed: () async {
-                  await Firebase.initializeApp().then((value) async {
-                    await FirebaseAuth.instance.signOut().then((value) =>
-                        Navigator.pushNamedAndRemoveUntil(
-                            context, '/authen', (route) => false));
-                  });
-                },
-              )
-            ],
+            
             flexibleSpace: Container(
               decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -69,11 +58,11 @@ class _DatapageState extends State<Datapage> {
                       child: Column(
                         children: [
                           Icon(
-                            Icons.face_retouching_natural_rounded,
+                            Icons.home,
                             color: Colors.black,
                           ),
                           Text(
-                            'โปรไฟล์',
+                            'หน้าหลัก',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 10,
@@ -84,7 +73,7 @@ class _DatapageState extends State<Datapage> {
                     ),
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Adddata()));
+                          MaterialPageRoute(builder: (context) => Datapage()));
                     },
                   ),
                 ),
@@ -109,7 +98,7 @@ class _DatapageState extends State<Datapage> {
                     ),
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Adddata()));
+                          MaterialPageRoute(builder: (context) => nof()));
                     },
                   ),
                 ),
@@ -146,7 +135,7 @@ class _DatapageState extends State<Datapage> {
           ),
           body: SingleChildScrollView(
             child: Container(
-              padding: EdgeInsets.only(bottom: 56),
+              padding: EdgeInsets.only(bottom: 63),
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage('assets/images/cow22.png'),

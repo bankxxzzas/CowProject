@@ -152,11 +152,14 @@ class _AdddataState extends State<Adddata> {
           ),
           onPressed: () => chooseImage(ImageSource.camera),
         ),
-        Container(
-          width: 200.0,
-          child: file == null
-              ? Image.asset('assets/images/photo.png')
-              : Image.file(file!),
+        MaterialButton(
+          child: Container(
+            width: 200.0,
+            child: file == null
+                ? Image.asset('assets/images/photo.png')
+                : Image.file(file!),
+          ),
+          onPressed: () => chooseImage(ImageSource.gallery),
         ),
         IconButton(
           icon: Icon(
@@ -451,10 +454,6 @@ class _AdddataState extends State<Adddata> {
                     uidRecord: uid, 
                     dateChooseNew: dateChooseLtr!, 
                     );
-
-               
-
-
 
                 Map<String, dynamic> map = model.toMap();
                 await FirebaseFirestore.instance
