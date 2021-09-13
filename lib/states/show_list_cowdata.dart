@@ -85,7 +85,7 @@ class _ShowListCowDataState extends State<ShowListCowData> {
                 style: TextStyle(fontSize: 15),
               ),
               Text(
-                '${model.dateChoose}',
+                'วันที่ ${model.dateChoose}',
                 style: TextStyle(fontSize: 15),
               ),
               Text(
@@ -93,7 +93,7 @@ class _ShowListCowDataState extends State<ShowListCowData> {
                 style: TextStyle(fontSize: 15),
               ),
               Text(
-                '${model.dateChooseNew}',
+                'วันที่ ${model.dateChooseNew}',
                 style: TextStyle(fontSize: 15),
               ),
               SizedBox(
