@@ -26,6 +26,7 @@ class _AdddataState extends State<Adddata> {
   String? dateChooseStr;
   String? dateChooseLtr;
   String? dateMix;
+  String? dateMixnew;
   String? dateAge;
   String? ageString;
 
@@ -452,7 +453,7 @@ class _AdddataState extends State<Adddata> {
                     pathImage: pathImage,
                     type: type!,
                     uidRecord: uid, 
-                    dateChooseNew: dateChooseLtr!, 
+                    dateChooseNew: dateChooseLtr!,
                     );
 
                 Map<String, dynamic> map = model.toMap();

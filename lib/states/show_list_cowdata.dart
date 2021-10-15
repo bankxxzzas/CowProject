@@ -18,6 +18,7 @@ class _ShowListCowDataState extends State<ShowListCowData> {
   List<CowDataModel> cowDataModels = [];
 
 
+
   @override
   void initState() {
     super.initState();
@@ -44,7 +45,6 @@ class _ShowListCowDataState extends State<ShowListCowData> {
   }
 
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,10 +58,10 @@ class _ShowListCowDataState extends State<ShowListCowData> {
             ),
     );
   }
+ 
 
   // ignore: non_constant_identifier_names
   Future<Null> myShowDialog(CowDataModel model) async {
-
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
